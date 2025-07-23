@@ -137,10 +137,13 @@ Ten projekt to **prosta i funkcjonalna aplikacja mobilna do zarządzania listą 
 
 Poniżej przykładowe wyniki działania aplikacji:
 
-![Podgląd działania](foto1.jpg)  
-![Podgląd działania](foto2.jpg)  
-![Podgląd działania](foto3.jpg)  
-![Podgląd działania](foto4.jpg)  
-![Podgląd działania](foto5.jpg)  
+<p float="left">
+  <img src="foto1.jpg" width="300"/>
+  <img src="foto2.jpg" width="300"/>
+  <img src="foto3.jpg" width="300"/>
+  <img src="foto4.jpg" width="300"/>
+  <img src="foto5.jpg" width="300"/>
+</p>
+  
 
 </details>
