@@ -7,8 +7,8 @@ Ten projekt to **prosta i funkcjonalna aplikacja mobilna do zarządzania listą 
 
 ## <img src="https://img.icons8.com/pastel-glyph/64/FFFFFF/code--v2.png" height="22px" /> Technologie i środowisko
 
-- **Język:** Kotlin
-- **Środowisko IDE:** Android Studio  
+- **Język:** [![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org/docs/home.html)
+- **Środowisko IDE:** [![Android Studio](https://img.shields.io/badge/Android%20Studio-3DDC84?style=flat&logo=android-studio&logoColor=white)](https://developer.android.com/studio)  
 - **Running devices:** samsung SM-A346B •  
 - **Biblioteki:**
   - Room – lokalna baza danych do przechowywania zadań
