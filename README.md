@@ -1,7 +1,7 @@
 
 <h1 align="center"><img src="https://img.icons8.com/ios-filled/50/FFFFFF/android.png" height="22px" /> Aplikacja Mobilna: Lista Zadań w Kotlin</h1>
 
-Ten projekt to **prosta i funkcjonalna aplikacja mobilna do zarządzania listą zadań (TODO)**, stworzona w języku Kotlin z wykorzystaniem Android Studio. Pozwala użytkownikowi na dodawanie, usuwanie i oznaczanie zadań jako wykonane. Dane przechowywane są lokalnie za pomocą **Room Database**. Aplikacja została stworzona z wykorzystaniem wzorca architektonicznego **MVVM**, co zapewnia przejrzystość i łatwość w rozbudowie projektu.
+Ten projekt to **prosta i funkcjonalna aplikacja mobilna do zarządzania listą zadań (TODO)**, stworzona w języku Kotlin z wykorzystaniem Android Studio. Pozwala użytkownikowi na dodawanie i edytowanie notatek. Dane przechowywane są lokalnie za pomocą **Room Database**. Aplikacja została stworzona z wykorzystaniem wzorca architektonicznego **MVVM**, co zapewnia przejrzystość i łatwość w rozbudowie projektu.
 
 ---
 
