@@ -28,67 +28,103 @@ Ten projekt to **prosta i funkcjonalna aplikacja mobilna do zarządzania listą 
 <details>
   <summary>📄 <strong><span style="color:#4a90e2">MainActivity.kt</span></strong> – główna aktywność (kliknij, aby rozwinąć)</summary>
 
-- Odpowiada za inicjalizację interfejsu użytkownika.
-- Ustawia `RecyclerView` do wyświetlania zadań.
-- Implementuje nawigację do ekranu dodawania nowego zadania.
-- Współpracuje z `ViewModel` w celu obserwowania danych LiveData.
+- Inicjalizuje całą aplikację Compose.
+- Ustawia motyw (jasny/ciemny) z możliwością przełączania.
+- Obsługuje nawigację pomiędzy ekranami listy i edycji notatek.
+- Inicjalizuje bazę danych i ViewModel z repozytorium.
+- Przykładowo usuwa wszystkie notatki przy starcie (do testów).
 
 </details>
 
 ---
 
 <details>
-  <summary>📄 <strong><span style="color:#7b8d8e">Task.kt</span></strong> – model danych (kliknij, aby rozwinąć)</summary>
+  <summary>📄 <strong><span style="color:#7b8d8e">Note.kt</span></strong> – model danych (kliknij, aby rozwinąć)</summary>
 
-- Klasa `data class Task(...)` reprezentuje pojedyncze zadanie.
-- Adnotacje `@Entity`, `@PrimaryKey`, `@ColumnInfo` definiują strukturę tabeli w Room Database.
-- Zawiera pola takie jak: `id`, `title`, `isCompleted`.
-
-</details>
-
----
-
-<details>
-  <summary>📄 <strong><span style="color:#9b59b6">TaskDao.kt</span></strong> – interfejs DAO (kliknij, aby rozwinąć)</summary>
-
-- Zawiera metody dostępu do bazy danych:
-  - `getAllTasks()`: zwraca listę zadań jako `LiveData<List<Task>>`
-  - `insertTask(task: Task)`
-  - `deleteTask(task: Task)`
-  - `updateTask(task: Task)`
+- Klasa danych reprezentująca notatkę.
+- Oznaczona jako `@Entity` dla Room Database.
+- Pola: `id`, `title`, `content`.
 
 </details>
 
 ---
 
 <details>
-  <summary>📄 <strong><span style="color:#2ecc71">AppDatabase.kt</span></strong> – konfiguracja bazy danych (kliknij, aby rozwinąć)</summary>
+  <summary>📄 <strong><span style="color:#9b59b6">NoteDao.kt</span></strong> – interfejs DAO (kliknij, aby rozwinąć)</summary>
 
-- Tworzy instancję Room Database.
-- Singletonowy dostęp do bazy danych (`getDatabase()`).
-- Łączy `TaskDao` i `Task` jako encję.
-
-</details>
-
----
-
-<details>
-  <summary>📄 <strong><span style="color:#e67e22">TaskViewModel.kt</span></strong> – logika widoku (kliknij, aby rozwinąć)</summary>
-
-- Klasa `ViewModel` łącząca warstwę danych z interfejsem UI.
-- Wystawia `LiveData<List<Task>>` do obserwacji przez UI.
-- Zawiera metody: `addTask()`, `removeTask()`, `toggleCompleted()`.
+- Udostępnia operacje na bazie danych:
+  - `getAllNotes()`: zwraca wszystkie notatki jako `Flow<List<Note>>`
+  - `getNoteById(id)`: pobiera notatkę po ID
+  - `addNote(note)`: dodaje lub aktualizuje notatkę
+  - `deleteNote(note)`: usuwa notatkę
+  - `deleteAllNotes()`: usuwa wszystkie notatki
 
 </details>
 
 ---
 
 <details>
-  <summary>📄 <strong><span style="color:#c0392b">AddTaskActivity.kt</span></strong> – dodawanie zadań (kliknij, aby rozwinąć)</summary>
+  <summary>📄 <strong><span style="color:#2ecc71">NoteDatabase.kt</span></strong> – konfiguracja bazy danych (kliknij, aby rozwinąć)</summary>
 
-- Aktywność z formularzem dodawania nowego zadania.
-- Obsługuje przycisk zatwierdzający dodanie do bazy.
-- Waliduje dane wejściowe użytkownika.
+- Tworzy bazę danych Room z encją `Note` i DAO `NoteDao`.
+- Zawiera mechanizm singletonowy dla jednej instancji bazy.
+
+</details>
+
+---
+
+<details>
+  <summary>📄 <strong><span style="color:#f39c12">NoteRepository.kt</span></strong> – warstwa pośrednia (kliknij, aby rozwinąć)</summary>
+
+- Oddziela logikę bazodanową od ViewModelu.
+- Udostępnia metody `addNote`, `getNoteById`, `deleteNote`, `deleteAllNotes`.
+- `notes`: przepływ wszystkich notatek jako `Flow<List<Note>>`.
+
+</details>
+
+---
+
+<details>
+  <summary>📄 <strong><span style="color:#e67e22">NoteViewModel.kt</span></strong> – logika widoku (kliknij, aby rozwinąć)</summary>
+
+- Łączy repozytorium z interfejsem UI.
+- Przechowuje i aktualizuje listę notatek oraz notatkę aktualnie edytowaną.
+- Udostępnia metody: `addNote`, `updateNote`, `deleteNote`, `loadNote`, `clearCurrentNote`.
+
+</details>
+
+---
+
+<details>
+  <summary>📄 <strong><span style="color:#3498db">AddEditNoteScreen.kt</span></strong> – ekran dodawania/edycji notatki (kliknij, aby rozwinąć)</summary>
+
+- Dynamiczny ekran służący do dodawania lub edytowania notatki.
+- Obsługuje wprowadzenie tytułu i treści notatki.
+- Używa ViewModelu do załadowania notatki i zapisania zmian.
+- Zawiera przyciski: „Zapisz” i „Anuluj”.
+
+</details>
+
+---
+
+<details>
+  <summary>📄 <strong><span style="color:#1abc9c">NoteListScreen.kt</span></strong> – ekran listy notatek (kliknij, aby rozwinąć)</summary>
+
+- Wyświetla listę wszystkich notatek.
+- Umożliwia przejście do ekranu edycji po kliknięciu na notatkę.
+- Zawiera przycisk do przełączenia motywu (jasny/ciemny).
+- Posiada `FloatingActionButton` do dodawania nowych notatek.
+
+</details>
+
+---
+
+<details>
+  <summary>📄 <strong><span style="color:#8e44ad">NoteCard.kt</span></strong> – komponent UI notatki (kliknij, aby rozwinąć)</summary>
+
+- Komponent wyświetlający pojedynczą notatkę w formie karty.
+- Umożliwia kliknięcie i przejście do edycji notatki.
+- Styl oparty na Material3 z tytułem i treścią.
 
 </details>
 
